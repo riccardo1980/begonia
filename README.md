@@ -3,6 +3,7 @@
 - migration tool: goose
 - swagger generation: go-swagger (gin?)
 
+
 To deepen:
 `go mod tidy -diff`
 `go mod verify`
@@ -28,3 +29,9 @@ To deepen:
     `go build -o=/tmp/bin/${binary_name} ${main_package_path}`
 
 - debug build
+
+- logging
+
+- env variables
+    - IP
+    - PORT
