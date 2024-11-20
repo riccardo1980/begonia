@@ -1,19 +1,33 @@
 package config
 
+import (
+	"os"
+	// this will automatically load your .env file:
+	_ "github.com/joho/godotenv/autoload"
+)
+
 type Config struct {
 	IP   string
 	Port string `json:"port"`
 }
 
 var DefaultConfig = Config{
-	IP:   "127.0.01",
+	IP:   "127.0.0.1",
 	Port: "8080",
 }
 
-func LoadConfig() (cfg *Config, err error) {
+func LoadConfig() (*Config, error) {
+	cfg := &Config{}
 
-	err = nil
-	cfg = &DefaultConfig
+	cfg.IP = os.Getenv("IP")
+	if cfg.IP == "" {
+		cfg.IP = DefaultConfig.IP
+	}
 
-	return cfg, err
+	cfg.Port = os.Getenv("PORT")
+	if cfg.Port == "" {
+		cfg.Port = DefaultConfig.Port
+	}
+
+	return cfg, nil
 }
