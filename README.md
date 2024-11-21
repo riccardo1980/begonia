@@ -12,23 +12,6 @@ To deepen:
 
 - module prerequisites update
 
-- lint
-    `go fmt ./...`
-
-- static / vulnerability check
-    `go vet ./...`
-
-- test
-    `go test -v -race -buildvcs ./...`
-
-- test coverage
-	`go test -v -race -buildvcs -coverprofile=/tmp/coverage.out ./...`
-	`go tool cover -html=/tmp/coverage.out`
-
-- build
-    `go build -o=/tmp/bin/${binary_name} ${main_package_path}`
-
-- debug build
 
 - logging
 
