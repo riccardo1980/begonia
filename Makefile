@@ -4,6 +4,7 @@ else
 	V=@
 endif
 
+include .env
 .PHONY: docs
 
 dev: mod swagger formatter vet test build
@@ -44,3 +45,21 @@ mod:
 	@echo "*** requirements ***"
 	@echo 
 	$(V)go mod tidy
+
+dbu:
+	$(V)migrate \
+		-database postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@localhost:5432/$(POSTGRES_DB)?sslmode=disable \
+		-source file://db/migrations \
+		up
+
+dbd:
+	$(V)migrate \
+		-database postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@localhost:5432/$(POSTGRES_DB)?sslmode=disable \
+		-source file://db/migrations \
+		down
+
+infra-up:
+	$(V)docker compose up
+
+infra-zap:
+	$(V)docker compose down
